@@ -58,3 +58,19 @@ function displayScore() {
 }
 
 console.log((playRound(computerSelection, playerSelection)));
+
+function playGame() {
+    for (let roundNumber = 1; roundNumber < 5; roundNumber++) {
+        computerSelection = computerPlay();
+        playerSelection = playerPlay();
+        console.log(playRound(computerSelection, playerSelection));
+    }
+
+    if (playerScore > cpuScore) {
+        return 'You\'ve won!';
+    } else {
+        return 'You\'ve been defeated...';
+    }
+}
+
+console.log(playGame());
