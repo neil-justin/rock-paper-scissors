@@ -39,7 +39,6 @@ function playerWin() {
     playerScore += 1;
     console.log(`You win! ${playerSelection} beats ${computerSelection}`);
     return displayScore();
-
 }
 
 function noWinner() {
