@@ -1,5 +1,5 @@
 function computerPlay() {
-    let computerChoice = Math.ceil(Math.random() * 3);
+    const computerChoice = Math.ceil(Math.random() * 3);
 
     switch (computerChoice) {
         case 1:
@@ -12,8 +12,8 @@ function computerPlay() {
 }
 
 function playerPlay() {
-    let playerChoice = prompt('Enter your weapon choice', 'Rock, Paper, or Scissors?');
-    let fixInvalidInput = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
+    const playerChoice = prompt('Enter your weapon choice', 'Rock, Paper, or Scissors?');
+    const fixInvalidInput = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
     return fixInvalidInput;
 }
 
