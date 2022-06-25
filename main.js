@@ -60,8 +60,18 @@ console.log((playRound(computerSelection, playerSelection)));
 
 function playGame() {
     for (let roundNumber = 1; roundNumber < 5; roundNumber++) {
+        /* The variable below should be refer along with its initial value
+        i.e. computerSelection = computerPlay(); and playerSelection = playerPlay();.
+        If you refer the variable without its initial value i.e. computerSelection; and
+        playerSelection;, when the script execution reaches this block
+        the computerSelection' and playerSelection' value will be the same
+        as its value in line 20 and 21. For example, if playerSelection's
+        value is Rock and computerSelection's value is Paper, that will still be
+        the value until the end of the game.
+        */
         computerSelection = computerPlay();
         playerSelection = playerPlay();
+
         console.log(playRound(computerSelection, playerSelection));
     }
 
