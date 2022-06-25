@@ -67,8 +67,10 @@ function playGame() {
 
     if (playerScore > cpuScore) {
         return 'You\'ve won!';
-    } else {
+    } else if (playerScore < cpuScore) {
         return 'You\'ve been defeated...';
+    } else {
+        return 'It\'s a tie... No side has won nor lost.'
     }
 }
 
