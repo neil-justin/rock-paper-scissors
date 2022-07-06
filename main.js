@@ -1,87 +1,46 @@
 function computerPlay() {
-    const computerChoice = Math.ceil(Math.random() * 3);
-
-    switch (computerChoice) {
-        case 1:
-            return ('Rock');
-        case 2:
-            return ('Paper');
-        case 3:
-            return ('Scissors');
-    }
+    const computerChoices = ['Rock', 'Paper', 'Scissors'];
+    const randomIndex = Math.floor(Math.random() * computerChoices.length);
+    return computerChoices[randomIndex];
 }
 
-function playerPlay() {
-    const playerChoice = prompt('Enter your weapon choice', 'Rock, Paper, or Scissors?');
-    const fixInvalidInput = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-    return fixInvalidInput;
-}
+function playRound(playerSelection, computerSelection) {
+    let playerScore = 0;
+    let cpuScore = 0;
 
-let computerSelection = computerPlay();
-let playerSelection = playerPlay();
-
-function playRound(computerSelection, playerSelection) {
     if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
         (playerSelection === 'Paper' && computerSelection === 'Rock') ||
         (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
-        return playerWin();
+        playerScore++;
+        return announcePlayerWin(displayScores());
     } else if (playerSelection === computerSelection) {
-        return noWinner();
+        return announceDraw(displayScores());
     } else {
-        return cpuWin();
+        cpuScore++;
+        return announceCpuWin(displayScores());
+    }
+
+    function announcePlayerWin(scores) {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        return scores;
+    }
+
+    function announceDraw(scores) {
+        console.log('It\'s a tie! You both use the same weapon.');
+        return scores;
+    }
+
+    function announceCpuWin(scores) {
+        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+        return scores;
+    }
+
+    function displayScores() {
+        return `Player score: ${playerScore} | CPU score: ${cpuScore}`;
     }
 }
 
-let playerScore = 0;
-let cpuScore = 0;
-
-function playerWin() {
-    playerScore += 1;
-    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-    return displayScore();
-}
-
-function noWinner() {
-    console.log('It\s a tie! You both use the same weapon.');
-    return displayScore();
-}
-
-function cpuWin() {
-    cpuScore += 1;
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-    return displayScore();
-}
-
-function displayScore() {
-    return `Player score: ${playerScore} | Computer score: ${cpuScore}`;
-}
-
-console.log((playRound(computerSelection, playerSelection)));
-
-function playGame() {
-    for (let roundNumber = 1; roundNumber < 5; roundNumber++) {
-        /* The variable below should be refer along with its initial value
-        i.e. computerSelection = computerPlay(); and playerSelection = playerPlay();.
-        If you refer the variable without its initial value i.e. computerSelection; and
-        playerSelection;, when the script execution reaches this block
-        the computerSelection' and playerSelection' value will be the same
-        as its value in line 20 and 21. For example, if playerSelection's
-        value is Rock and computerSelection's value is Paper, that will still be
-        the value until the end of the game.
-        */
-        computerSelection = computerPlay();
-        playerSelection = playerPlay();
-
-        console.log(playRound(computerSelection, playerSelection));
-    }
-
-    if (playerScore > cpuScore) {
-        return 'You\'ve won!';
-    } else if (playerScore < cpuScore) {
-        return 'You\'ve been defeated...';
-    } else {
-        return 'It\'s a tie... No side has won nor lost.'
-    }
-}
-
-console.log(playGame());
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', () => console.log(playRound(button.value, computerPlay())));
+});
