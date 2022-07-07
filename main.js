@@ -8,6 +8,12 @@ function playRound(playerSelection, computerSelection) {
     let playerScore = 0;
     let cpuScore = 0;
 
+    const roundResultDiv = document.querySelector('.round-result-cntr');
+    const roundResultPara = document.createElement('p');
+    roundResultDiv.appendChild(roundResultPara);
+    const scoresPara = document.createElement('p');
+    roundResultDiv.appendChild(scoresPara)
+
     if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
         (playerSelection === 'Paper' && computerSelection === 'Rock') ||
         (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
@@ -21,26 +27,26 @@ function playRound(playerSelection, computerSelection) {
     }
 
     function announcePlayerWin(scores) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+        roundResultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
         return scores;
     }
 
     function announceDraw(scores) {
-        console.log('It\'s a tie! You both use the same weapon.');
+        roundResultPara.textContent = 'It\'s a tie! You both use the same weapon.';
         return scores;
     }
 
     function announceCpuWin(scores) {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+        roundResultPara.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
         return scores;
     }
 
     function displayScores() {
-        return `Player score: ${playerScore} | CPU score: ${cpuScore}`;
+        return scoresPara.textContent = `Player score: ${playerScore} | CPU score: ${cpuScore}`;
     }
 }
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach(button => {
-    button.addEventListener('click', () => console.log(playRound(button.value, computerPlay())));
+    button.addEventListener('click', () => playRound(button.value, computerPlay()));
 });
