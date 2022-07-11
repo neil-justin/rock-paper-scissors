@@ -6,11 +6,16 @@ const playGame = function () {
     }
 
     const buttons = document.querySelectorAll('button');
-    const resultDiv = document.querySelector('.result-cntr');
-    const roundResultPara = document.createElement('p');
-    resultDiv.appendChild(roundResultPara);
+
+    const resultScoresCntr = document.querySelector('.result-cntr');
+    const resultPara = document.createElement('p');
+    resultPara.style.cssText = 'font-size: 22px; color: #e8eddf; font-weight: bold; margin: 22px 10px 10px;'
+    resultScoresCntr.appendChild(resultPara);
     const scoresPara = document.createElement('p');
-    resultDiv.appendChild(scoresPara);
+    scoresPara.style.cssText = 'font-size: 22px; color: #e8eddf; font-weight: bold; margin: 10px 10px 22px;'
+    resultScoresCntr.appendChild(scoresPara);
+
+    resultPara.textContent = 'Choose your weapon';
 
     let playerScore = 0;
     let cpuScore = 0;
@@ -29,29 +34,37 @@ const playGame = function () {
         }
 
         function getRoundWinner(roundWinner, scores) {
+            const disableButtons = function () {
+                buttons.forEach(button => {
+                    button.disabled = true;
+                    button.classList.add('disable-button');
+                    return;
+                });
+            };
+
             if (roundWinner === 'player') {
                 if (playerScore === 5) {
-                    roundResultPara.textContent = `Victory! ${playerSelection} beats ${computerSelection}!`;
-                    buttons.forEach(button => button.disabled = true);
+                    resultPara.textContent = `Victory! ${playerSelection} beats ${computerSelection}!`;
+                    disableButtons();
                 } else {
-                    roundResultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+                    resultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
                 }
             } else if (roundWinner === 'cpu') {
                 if (cpuScore === 5) {
-                    roundResultPara.textContent = `Defeat... ${computerSelection} beats ${playerSelection}!`;
-                    buttons.forEach(button => button.disabled = true);
+                    resultPara.textContent = `Defeat... ${computerSelection} beats ${playerSelection}!`;
+                    disableButtons();
                 } else {
-                    roundResultPara.textContent = `You lose... ${playerSelection} beats ${computerSelection}`;
+                    resultPara.textContent = `You lose... ${playerSelection} beats ${computerSelection}`;
                 }
             } else {
-                roundResultPara.textContent = 'Draw! Both sides used the same weapon';
+                resultPara.textContent = 'Draw! Both sides used the same weapon';
             }
 
-            return roundResultPara, scores;
+            return resultPara, scores;
         }
 
         function displayScores() {
-            return scoresPara.textContent = `Player score: ${playerScore} | Computer score: ${cpuScore}`;
+            return scoresPara.textContent = `Player score: ${playerScore} - Computer score: ${cpuScore}`;
         }
     }
 
