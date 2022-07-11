@@ -26,12 +26,18 @@ body {
     margin: 40px 40px 0px;
 }
 
-.result-cntr {
+.result-scores-cntr {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     margin: 0%;
     height: 140px;
+}
+
+.scores-cntr {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .buttons-cntr {

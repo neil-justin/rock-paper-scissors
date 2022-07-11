@@ -7,15 +7,18 @@ const playGame = function () {
 
     const buttons = document.querySelectorAll('button');
 
-    const resultScoresCntr = document.querySelector('.result-cntr');
-    const resultPara = document.createElement('p');
-    resultPara.style.cssText = 'font-size: 22px; color: #e8eddf; font-weight: bold; margin: 22px 10px 10px;'
-    resultScoresCntr.appendChild(resultPara);
-    const scoresPara = document.createElement('p');
-    scoresPara.style.cssText = 'font-size: 22px; color: #e8eddf; font-weight: bold; margin: 10px 10px 22px;'
-    resultScoresCntr.appendChild(scoresPara);
-
+    const resultScoresCntr = document.querySelector('.result-scores-cntr');
+    const resultPara = document.querySelector('.result');
     resultPara.textContent = 'Choose your weapon';
+    resultPara.style.cssText = 'font-size: 26px; color: #e8eddf; font-weight: bold; margin: 22px 10px 10px;';
+    resultScoresCntr.appendChild(resultPara);
+    const scoresCntr = document.querySelector('.scores-cntr');
+    const playerScorePara = document.createElement('p');
+    playerScorePara.style.cssText = 'font-size: 22px; color: #e9ecef; margin: 10px 10px 22px;';
+    scoresCntr.appendChild(playerScorePara);
+    const cpuScorePara = document.createElement('p');
+    cpuScorePara.style.cssText = 'font-size: 22px; color: #e9ecef; margin: 10px 10px 22px;';
+    scoresCntr.appendChild(cpuScorePara);
 
     let playerScore = 0;
     let cpuScore = 0;
@@ -64,7 +67,9 @@ const playGame = function () {
         }
 
         function displayScores() {
-            return scoresPara.textContent = `Player score: ${playerScore} - Computer score: ${cpuScore}`;
+            playerScorePara.textContent = `Player score: ${playerScore}`;
+            cpuScorePara.textContent = `Computer score: ${cpuScore}`;
+            return playerScorePara, cpuScorePara;
         }
     }
 
