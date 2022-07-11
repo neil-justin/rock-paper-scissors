@@ -6,19 +6,16 @@ const playGame = function () {
     }
 
     const buttons = document.querySelectorAll('button');
+    const resultDiv = document.querySelector('.result-cntr');
+    const roundResultPara = document.createElement('p');
+    resultDiv.appendChild(roundResultPara);
+    const scoresPara = document.createElement('p');
+    resultDiv.appendChild(scoresPara);
 
     let playerScore = 0;
     let cpuScore = 0;
 
     function playRound(playerSelection, computerSelection) {
-        const roundResultDiv = document.querySelector('.round-result-cntr');
-
-        const roundResultPara = document.createElement('p');
-        roundResultDiv.appendChild(roundResultPara);
-
-        const scoresPara = document.createElement('p');
-        roundResultDiv.appendChild(scoresPara);
-
         if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
             (playerSelection === 'Paper' && computerSelection === 'Rock') ||
             (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
