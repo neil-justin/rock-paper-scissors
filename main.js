@@ -9,7 +9,7 @@ const playGame = function () {
 
     const resultScoresCntr = document.querySelector('.result-scores-cntr');
     const resultPara = document.querySelector('.result');
-    resultPara.textContent = 'Choose your weapon';
+    resultPara.textContent = 'Choose your weapon!';
     resultPara.style.cssText = 'font-size: 26px; color: #e8eddf; font-weight: bold; margin: 22px 10px 10px;';
     resultScoresCntr.appendChild(resultPara);
     const scoresCntr = document.querySelector('.scores-cntr');
@@ -50,17 +50,17 @@ const playGame = function () {
                     resultPara.textContent = `Victory! ${playerSelection} beats ${computerSelection}!`;
                     disableButtons();
                 } else {
-                    resultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+                    resultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
                 }
             } else if (roundWinner === 'cpu') {
                 if (cpuScore === 5) {
                     resultPara.textContent = `Defeat... ${computerSelection} beats ${playerSelection}!`;
                     disableButtons();
                 } else {
-                    resultPara.textContent = `You lose... ${playerSelection} beats ${computerSelection}`;
+                    resultPara.textContent = `You lose... ${computerSelection} beats ${playerSelection}!`;
                 }
-            } else {
-                resultPara.textContent = 'Draw! Both sides used the same weapon';
+            } else if (roundWinner === 'none') {
+                resultPara.textContent = `Draw! Both sides used ${playerSelection}!`;
             }
 
             return resultPara, scores;
