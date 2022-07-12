@@ -1,86 +1,80 @@
-function computerPlay() {
-    const computerChoice = Math.ceil(Math.random() * 3);
-
-    switch (computerChoice) {
-        case 1:
-            return ('Rock');
-        case 2:
-            return ('Paper');
-        case 3:
-            return ('Scissors');
-    }
-}
-
-function playerPlay() {
-    const playerChoice = prompt('Enter your weapon choice', 'Rock, Paper, or Scissors?');
-    return playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1).toLowerCase();
-
-}
-
-let computerSelection = computerPlay();
-let playerSelection = playerPlay();
-
-function playRound(computerSelection, playerSelection) {
-    if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
-        (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-        (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
-        return announcePlayerWin();
-    } else if (playerSelection === computerSelection) {
-        return announceDraw();
-    } else {
-        return announceCpuWin();
-    }
-}
-
-let playerScore = 0;
-let cpuScore = 0;
-
-function announcePlayerWin() {
-    playerScore += 1;
-    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
-    return displayScore();
-}
-
-function announceDraw() {
-    console.log('It\s a tie! You both use the same weapon.');
-    return displayScore();
-}
-
-function announceCpuWin() {
-    cpuScore += 1;
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-    return displayScore();
-}
-
-function displayScore() {
-    return `Player score: ${playerScore} | CPU score: ${cpuScore}`;
-}
-
-console.log((playRound(computerSelection, playerSelection)));
-
-function playGame() {
-    for (let i = 1; i < 5; i++) {
-        /* The variable below should be refer along with its value
-        i.e. computerSelection = computerPlay(); and playerSelection = playerPlay();
-        in order for the variable to run the function in each iteration. */
-        computerSelection = computerPlay();
-        playerSelection = playerPlay();
-
-        console.log(playRound(computerSelection, playerSelection));
-    }
-    
-    announceGameResult();
-}
-
-function announceGameResult() {
-    if (playerScore > cpuScore) {
-        return 'You\'ve won!';
-    } else if (playerScore < cpuScore) {
-        return 'You\'ve been defeated...';
-    } else {
-        return 'It\'s a tie... No side has won nor lost.'
+const playGame = function () {
+    function computerPlay() {
+        const computerChoices = ['Rock', 'Paper', 'Scissors'];
+        const randomIndex = Math.floor(Math.random() * computerChoices.length);
+        return computerChoices[randomIndex];
     }
 
+    const buttons = document.querySelectorAll('button');
+    const disableButtons = function () {
+        buttons.forEach(button => {
+            button.disabled = true;
+            button.classList.add('disable-button');
+            return;
+        });
+    };
+
+    const resultScoresCntr = document.querySelector('.result-scores-cntr');
+    const resultPara = document.querySelector('.result');
+    resultPara.textContent = 'Choose your weapon!';
+    resultPara.style.cssText = 'font-size: 26px; color: #e8eddf; font-weight: bold; margin: 22px 10px 10px;';
+    resultScoresCntr.appendChild(resultPara);
+    const scoresCntr = document.querySelector('.scores-cntr');
+    const playerScorePara = document.createElement('p');
+    playerScorePara.style.cssText = 'font-size: 22px; color: #e9ecef; margin: 10px 10px 22px;';
+    scoresCntr.appendChild(playerScorePara);
+    const cpuScorePara = document.createElement('p');
+    cpuScorePara.style.cssText = 'font-size: 22px; color: #e9ecef; margin: 10px 10px 22px;';
+    scoresCntr.appendChild(cpuScorePara);
+
+    let playerScore = 0;
+    let cpuScore = 0;
+
+    function playRound(playerSelection, computerSelection) {
+        if ((playerSelection === 'Rock' && computerSelection === 'Scissors') ||
+            (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+            (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+            playerScore++;
+            return getRoundWinner('player', displayScores());
+        } else if (playerSelection === computerSelection) {
+            return getRoundWinner('none', displayScores());
+        } else {
+            cpuScore++;
+            return getRoundWinner('cpu', displayScores());
+        }
+
+        function getRoundWinner(roundWinner, scores) {
+            if (roundWinner === 'player') {
+                if (playerScore === 5) {
+                    resultPara.textContent = `Victory! ${playerSelection} beats ${computerSelection}!`;
+                    disableButtons();
+                } else {
+                    resultPara.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
+                }
+            } else if (roundWinner === 'cpu') {
+                if (cpuScore === 5) {
+                    resultPara.textContent = `Defeat... ${computerSelection} beats ${playerSelection}!`;
+                    disableButtons();
+                } else {
+                    resultPara.textContent = `You lose... ${computerSelection} beats ${playerSelection}!`;
+                }
+            } else if (roundWinner === 'none') {
+                resultPara.textContent = `Draw! Both sides used ${playerSelection}!`;
+            }
+
+            return resultPara, scores;
+        }
+
+        function displayScores() {
+            playerScorePara.textContent = `Player score: ${playerScore}`;
+            cpuScorePara.textContent = `Computer score: ${cpuScore}`;
+            return playerScorePara, cpuScorePara;
+        }
+    }
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => playRound(button.value, computerPlay()));
+    });
 }
 
-console.log(playGame());
+playGame();
