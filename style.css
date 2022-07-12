@@ -57,16 +57,12 @@ button {
 
 button:hover,
 button:active {
-    background-color: #242423;
+    background-color: #585858;
     color: #cfdbd5;
+    border: 2px solid #cfdbd5;
 }
 
-.disable-button {
-    color: gray;
-    background-color: #e9ecef;
-    border: 2px solid #e9ecef;
-}
-
+.disable-button,
 .disable-button:hover,
 .disable-button:active {
     color: gray;
