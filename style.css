@@ -23,7 +23,7 @@ body {
     font-size: 46px;
     color: #f5cb5c;
     font-weight: bold;
-    margin: 40px 40px 0px;
+    margin: 30px 30px 0px;
 }
 
 .result-scores-cntr {
@@ -72,6 +72,10 @@ button:active {
 
 ul {
     list-style-type: none;
+}
+
+footer {
+    margin: 30px
 }
 
 .footer-text {
