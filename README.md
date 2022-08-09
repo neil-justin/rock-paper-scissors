@@ -2,7 +2,7 @@
 A simple implementation of the game Rock Paper Scissors.
 
 ## Preview
-See for yourself the game [here](https://neil-justin.github.io/rock-paper-scissors/)
+See the game for yourself by clicking [this](https://neil-justin.github.io/rock-paper-scissors/)
 
 
 ![Rock Paper Scissors](game-preview.png)
