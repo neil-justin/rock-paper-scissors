@@ -1,8 +1,8 @@
-# rock-paper-scissors
+# Rock Paper Scissors
 A simple implementation of the game Rock Paper Scissors.
 
 ## Preview
-[Live preview](https://neil-justin.github.io/rock-paper-scissors/)
+See for yourself the game [here](https://neil-justin.github.io/rock-paper-scissors/)
 
 
 ![Rock Paper Scissors](game-preview.png)
